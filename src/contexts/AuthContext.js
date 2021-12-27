@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth'
 
 const AuthContext = createContext({
   currentUser: null,
+  register: () => Promise,
 })
 
 export const useAuth = () => useContext(AuthContext)
@@ -17,6 +18,7 @@ export default function AuthContextProvider({children}) {
   
   const value = {
     currentUser,
+    register,
   }
 
   return <AuthContext.Provider value={value}>
