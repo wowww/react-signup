@@ -7,7 +7,8 @@ import {
   signOut,
   GoogleAuthProvider,
   signInWithPopup,
-  sendPasswordResetEmail
+  sendPasswordResetEmail,
+  confirmPasswordReset
 } from 'firebase/auth'
 
 const AuthContext = createContext({
@@ -50,6 +51,10 @@ export default function AuthContextProvider({children}) {
     return sendPasswordResetEmail(auth, email, {
       url: 'http://localhost:3000/login',
     })
+  }
+
+  function resetPassword(oobCode, newPassword) {
+    return confirmPasswordReset(auth, oobCode, newPassword)
   }
 
   function logout() {
