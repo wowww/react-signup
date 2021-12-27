@@ -16,6 +16,7 @@ import { Card } from '../components/Card'
 import DividerWithText from '../components/DividerWithText'
 import { Layout } from '../components/Layout'
 import { useAuth } from '../contexts/AuthContext'
+import useMounted from '../hooks/useMounted'
 
 export default function Registerpage() {
   const history = useHistory()
@@ -25,6 +26,8 @@ export default function Registerpage() {
   const toast = useToast();
 
   const { register } = useAuth()
+
+  const mounted = useMounted()
 
   return (
     <Layout>
@@ -55,7 +58,7 @@ export default function Registerpage() {
               duration: 5000,
               isClosable: true
             })}).finally(() => {
-              setIsSubmitting(false)
+              mounted.current && setIsSubmitting(false)
             })
           }}
         >
