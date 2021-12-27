@@ -15,6 +15,7 @@ import { useHistory } from 'react-router-dom'
 import { Card } from '../components/Card'
 import DividerWithText from '../components/DividerWithText'
 import { Layout } from '../components/Layout'
+import { useAuth } from '../contexts/AuthContext'
 
 export default function Registerpage() {
   const history = useHistory()
@@ -22,6 +23,8 @@ export default function Registerpage() {
   const [ password, setPassword ] = useState('')
   const [ isSubmitting, setIsSubmitting ] = useState(false)
   const toast = useToast();
+
+  const { register } = useAuth()
 
   return (
     <Layout>
@@ -42,6 +45,18 @@ export default function Registerpage() {
               })
             }
             setIsSubmitting(true)
+            register(email, password)
+            .then((response) => console.log(response))
+            .catch((error) => {
+              console.log(error.message)
+              toast({
+              description: error.message,
+              status: 'error',
+              duration: 5000,
+              isClosable: true
+            })}).finally(() => {
+              setIsSubmitting(false)
+            })
           }}
         >
           <Stack spacing='6'>
