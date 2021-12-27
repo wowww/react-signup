@@ -18,6 +18,7 @@ const AuthContext = createContext({
   logout: () => Promise,
   signInWithGoogle: () => Promise,
   forgotPassword: () => Promise,
+  resetPassword: () => Promise,
 })
 
 export const useAuth = () => useContext(AuthContext)
@@ -68,6 +69,7 @@ export default function AuthContextProvider({children}) {
     logout,
     signInWithGoogle,
     forgotPassword,
+    resetPassword
   }
 
   return <AuthContext.Provider value={value}>
