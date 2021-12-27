@@ -9,9 +9,12 @@ import {
 import React from 'react'
 import { FaMoon, FaSun } from 'react-icons/fa'
 import Navlink from './Navlink'
+import { useAuth } from '../contexts/AuthContext'
 
 export function Navbar() {
   const { toggleColorMode } = useColorMode()
+
+  const { logout } = useAuth()
 
   return (
     <Box
@@ -31,8 +34,8 @@ export function Navbar() {
           name='Logout'
           onClick={async e => {
             e.preventDefault()
-            // handle logout
-            alert('logout user')
+            
+            logout()
           }}
         />
         <IconButton
