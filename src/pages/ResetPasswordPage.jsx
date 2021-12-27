@@ -22,10 +22,14 @@ function useQuery() {
 export default function ResetPasswordPage() {
 
   const { resetPassword } = useAuth()
+  const history = useHistory()
+
   const query = useQuery()
   console.log(query.get('mode'))
   console.log(query.get('oobCode'))
   console.log(query.get('continueUrl'))
+
+  const toast = useToast()
 
   const [ newPassword, setNewPassword ] = useState()
 
@@ -40,8 +44,25 @@ export default function ResetPasswordPage() {
             e.preventDefault()
             // handle reset password
             resetPassword(query.get('oobCode'), newPassword)
-              .then(res => console.log(res))
-              .catch(err => console.log(err.message))
+              .then(res => {
+                console.log(res)
+                toast({
+                  description: 'Password ha been changed, you can login now.',
+                  status: 'success',
+                  duration: 9000,
+                  isClosable: true
+                })
+                history.push('/login')
+              })
+              .catch(error => {
+                console.log(error.message)
+                toast({
+                  description: error.message,
+                  status: 'error',
+                  duration: 9000,
+                  isClosable: true
+                })
+              })
           }}
         >
           <Stack spacing='6'>
