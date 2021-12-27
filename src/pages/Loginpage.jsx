@@ -12,6 +12,7 @@ import {
   Box,
   Flex,
 } from '@chakra-ui/react'
+import { cleanup } from '@testing-library/react'
 import React, { useEffect, useRef, useState } from 'react'
 import { FaGoogle } from 'react-icons/fa'
 import { Link, useHistory } from 'react-router-dom'
@@ -27,7 +28,7 @@ export default function Loginpage() {
   const [ isSubmitting, setIsSubmitting ] = useState(false)
   const toast = useToast();
 
-  const { login } = useAuth()
+  const { login, signInWithGoogle } = useAuth()
 
   return (
     <Layout>
@@ -113,7 +114,11 @@ export default function Loginpage() {
           isFullWidth
           colorScheme='red'
           leftIcon={<FaGoogle />}
-          onClick={() => alert('sign in with google')}
+          onClick={() => 
+            signInWithGoogle()
+              .then(user=>console.log(user))
+              .catch(error => console.log(error))
+          }
         >
           Sign in with Google
         </Button>
