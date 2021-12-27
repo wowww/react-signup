@@ -14,7 +14,7 @@ const customTheme = extendTheme({
     useSystemColorMode: false,
   },
   colors: {
-    primary: theme.colors.pink,
+    primary: theme.colors.purple,
   },
 })
 
