@@ -48,7 +48,10 @@ export default function Loginpage() {
             }
             setIsSubmitting(true)
             login(email, password)
-            .then((response) => console.log(response))
+            .then((response) => {
+              console.log(response)
+              history.push('/profile')
+            })
             .catch((error) => {
               console.log(error.message)
               toast({
